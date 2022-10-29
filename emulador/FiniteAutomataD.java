@@ -39,7 +39,7 @@ public class FiniteAutomataD extends Exception {
                         else {
                             while (true) {
 
-                    //verifica se a linha não é ou se já foi lida pela primeira etapa de verificação
+                    //verifica se a linha não é vazia ou se já foi lida pela primeira etapa de verificação
 
                                 if (linha != null && !linha.contains("AFD")) {
                                 this.estadoInicial = Integer.parseInt(linha);
