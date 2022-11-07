@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 
 public class FiniteAutomataD extends Exception {
-    final String type = "FAD";
+    final String type = "F";
     Integer estadoInicial;
     Integer estadosFinais[];
     FuncaoTransicao[] pattern;
@@ -28,10 +28,11 @@ public class FiniteAutomataD extends Exception {
 
                     // le a primeira linha e verifica se o tipo de automato é válido
                         linha = textBuffer.readLine();
-                        if(!linha.contains("AFD")) {
+                        if(!linha.contains(type)) {
                             System.out.println("Tipo de automato inválido");
-                        }
-                        else {
+                       
+                        } else {
+
                             while (true) {
 
                                 //verifica se a linha não é vazia ou se já foi lida pela primeira etapa de verificação
@@ -61,7 +62,7 @@ public class FiniteAutomataD extends Exception {
                 
                     //
                 }           
-        }
+            }
 
     public void setMapaTransicao(String linha) {
     
@@ -71,7 +72,61 @@ public class FiniteAutomataD extends Exception {
 
     for (int i = 0; i < transicoes.length; i++) {
         pattern[i].setPattern(transicoes[i]);
+        }     
     }
-        
+
+    public String lerEntrada(File entrada) throws Exception {
+
+        //verifica o arquivo
+        if(entrada == null||!entrada.exists()||!entrada.getName().endsWith(".txt")) {
+            throw new Exception("Arquivo inválido");
+        } else {
+            
+            try {
+
+                //lê as entradas e manda retornar pra uma linha
+                BufferedReader textBuffer = new BufferedReader(new FileReader("texto.txt"));
+                String linha = "";
+                
+                while (true) {
+                textBuffer.readLine();
+                //verifica se a linha é vazia
+                    if(linha == null) {
+                        textBuffer.close();
+                        return null;
+
+                //retorna a linha pra usar no automato        
+                    } else {
+                linha = textBuffer.readLine();
+                return linha;
+                } 
+            }  
+        } catch (Exception e) {
+            System.out.println("Tipo de arquivo invalido");
+            }
+        }
+        return null;
+    }
+
+    public boolean finiteAutomata(File entrada) {
+    String linha = "";
+
+    //tenta a ler a linha e faz as verificações
+        try {
+        linha = lerEntrada(entrada);
+        if(linha == null) {
+            System.out.println("Erro inesperado, verifique se o arquivo existe ou se esta corretamente formatado.");
+            }
+        }
+        catch (Exception e) {
+        System.out.println("Arquivo inexistente ou vazio");
+    }
+    //
+
+    for (int i = 0; i < linha.length(); i++) {
+    // fazer computação aqui
+    }
+
+    return true;
     }
 }
